@@ -1,0 +1,59 @@
+<div class="container w-50">
+  <br>
+  <div class="float-left">
+    <button mat-icon-button [routerLink]="['/dashboard']">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>
+  <h1 class="text-center">Create Leave</h1>
+
+
+  <br>
+  <br>
+  <br>
+
+  <div class="container d-flex justify-content-center">
+    <form [formGroup]="leaveForm" (ngSubmit)="createLeave()">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date">
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+
+      </mat-form-field>
+
+
+
+
+
+      <div class="form-group">
+        <mat-label>Leave Type</mat-label>
+        <mat-select formControlName="leaveType">
+          <mat-option *ngFor="let type of leaveTypes" [value]="type.typeName">
+            {{type.typeName}}
+          </mat-option>
+        </mat-select>
+      </div>
+
+
+
+      <!-- LastName -->
+      <div class="form-group">
+        <label for="remarks">Remarks</label>
+        <input type="text" id="remarks" class=" form-control" id="remarks" placeholder="Enter remarks"
+          formControlName="remarks" name="remarks">
+      </div>
+
+
+
+
+
+      <button mat-raised-button color="primary" type="submit">Create</button>
+    </form>
+
+  </div>
+</div>

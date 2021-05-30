@@ -1,0 +1,141 @@
+<div class="mt-5">
+  <div class="float-right mr-5">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="mr-4">
+      <img class="float-left avatar" mat-card-sm-image src="{{employee?.imageUrl}}" alt="profile image">
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openDialog()">Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+
+  <div class="float-left ml-5">
+    <!-- <button mat-raised-button color="primary" [routerLink]="['/admin','create','employee']">
+      Create employee
+    </button> -->
+    <button mat-raised-button color="primary" class="ml-2" [routerLink]="['/','leave']">
+      Apply for leave
+    </button>
+    <button mat-raised-button color="primary" class="ml-2" [routerLink]="['/','timesheet']">
+      Timesheet Report
+    </button>
+    <button mat-raised-button color="primary" class="ml-2" [routerLink]="['/','leave','report']">
+      Leave Status
+    </button>
+  </div>
+</div>
+
+
+<br><br>
+<div style="background-color: white;height:100vh;" class="p-5">
+
+  <div class="ml-3 mr-3">
+    <div class="float-left ">
+      <button mat-raised-button (click)="goBack()">
+        <mat-icon>skip_previous</mat-icon>
+
+      </button>
+    </div>
+
+    <div class="float-right">
+      <button mat-raised-button (click)="goForward()">
+        <mat-icon>skip_next</mat-icon>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br><br>
+  <br>
+  <br>
+
+
+  <mat-grid-list cols="5" rowHeight="250px" row gutterSize="2px">
+
+    <mat-grid-tile *ngFor="let d of timesheets;let i=index;">
+      <mat-card style="height: 98%;width:90%">
+        <mat-card-title>
+          <h2>
+            {{d.timestamp | date:'fullDate'}}
+
+          </h2>
+        </mat-card-title>
+
+
+        <mat-card-content>
+          <div [class.text-danger]="d.status=='Absent'" [class.text-primary]="d.status=='Present'">
+            {{d.status}}
+          </div>
+          <br>
+          <select class="form-control" [(ngModel)]="status1[i]" [ngModelOptions]="{standalone: true}"
+            [disabled]="d.attendanceState=='submit'">
+            <label>ASD</label>
+            <option>Present</option>
+            <option>Absent</option>
+          </select>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button (click)="updateAttendance(d,i,'save')" [disabled]="d.attendanceState=='submit'"
+            class="ml-2">Save</button> -->
+          <button mat-raised-button color="primary" (click)="updateAttendance(d,i,'submit')" class="ml-2"
+            [disabled]="d.attendanceState=='submit'">Submit</button>
+        </mat-card-actions>
+
+      </mat-card>
+
+
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <br><br>
+  <div *ngIf="missingtimestamps.length > 0" class="">
+    <h1 class="mat-display-1">
+      Missing attendance
+    </h1>
+    <mat-grid-list cols="5" rowHeight="200px" row gutterSize="2px">
+
+      <mat-grid-tile *ngFor="let d of missingtimestamps;let i=index;">
+        <mat-card style="height: 98%;width:90%">
+          <mat-card-title>
+            <h2>
+              {{d | date:'fullDate'}}
+
+            </h2>
+          </mat-card-title>
+          <mat-card-content>
+
+            <form>
+
+              <select class="form-control" [(ngModel)]="status[i]" [ngModelOptions]="{standalone: true}">
+                <option>Present</option>
+                <option>Absent</option>
+              </select>
+
+            </form>
+
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-raised-button (click)="setValue(d,i)">Save</button>
+          </mat-card-actions>
+
+        </mat-card>
+
+
+
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+</div>

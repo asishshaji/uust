@@ -1,0 +1,23 @@
+
+db.Timesheet.aggregate([
+  {
+    $match:{
+      "dateTimestamp": {
+        "$gte":1621535400000,
+        "$lte":1622053800005
+      }
+    }
+  },{
+
+    $unwind: "$attendance",
+
+  },{
+    /**
+     * specifications: The fields to
+     *   include or exclude.
+     */
+    $match: {
+      "attendance.username":"Asish"
+    }
+  }
+])

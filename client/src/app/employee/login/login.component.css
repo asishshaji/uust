@@ -1,0 +1,8 @@
+.leftside {
+  background-color: #2178FD;
+}
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}

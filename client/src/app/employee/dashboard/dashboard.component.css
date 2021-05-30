@@ -1,0 +1,14 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 40%;
+}
