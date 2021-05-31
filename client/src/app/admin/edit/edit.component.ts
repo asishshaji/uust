@@ -20,6 +20,8 @@ export class EditComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {}
 
+  reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+
   id: any = -1
 
   employee: IEmployee
@@ -33,9 +35,12 @@ export class EditComponent implements OnInit {
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(3),
     ]),
-    imageUrl: new FormControl('', [Validators.required]),
+    imageUrl: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.reg),
+    ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),

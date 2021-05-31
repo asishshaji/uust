@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { EmployeeService } from 'src/app/shared/services/employee.service'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-leave',
@@ -11,7 +12,10 @@ import { EmployeeService } from 'src/app/shared/services/employee.service'
   styleUrls: ['./leave.component.css'],
 })
 export class LeaveComponent implements OnInit {
-  constructor(private _empService: EmployeeService) {}
+  constructor(
+    private _empService: EmployeeService,
+    private location: Location,
+  ) {}
   range = new FormGroup({
     start: new FormControl(moment().startOf('week').format('DD/MM/YYYY')),
     end: new FormControl(moment().endOf('week').format('DD/MM/YYYY')),
@@ -37,6 +41,9 @@ export class LeaveComponent implements OnInit {
       },
       (err) => {
         console.warn(err)
+      },
+      () => {
+        this.location.back()
       },
     )
   }

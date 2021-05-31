@@ -72,14 +72,14 @@ export class DashboardComponent implements OnInit {
   endOfWeek: number
 
   goBack() {
-    this.startOfWeek = this.startOfWeek - 5 * 86400000
-    this.endOfWeek = this.endOfWeek - 5 * 86400000
+    this.startOfWeek = this.startOfWeek - 4 * 86400000
+    this.endOfWeek = this.endOfWeek - 4 * 86400000
     this.getData()
   }
 
   goForward() {
-    this.startOfWeek = this.startOfWeek + 5 * 86400000
-    this.endOfWeek = this.endOfWeek + 5 * 86400000
+    this.startOfWeek = this.startOfWeek + 4 * 86400000
+    this.endOfWeek = this.endOfWeek + 4 * 86400000
     this.getData()
   }
 
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
   getData() {
     this.timestamps[0] = this.startOfWeek
 
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 4; index++) {
       this.timestamps[index + 1] = this.timestamps[index] + 86400000
     }
 

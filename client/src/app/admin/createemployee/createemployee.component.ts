@@ -21,13 +21,14 @@ export class CreateemployeeComponent implements OnInit {
   ) {}
 
   employee: any
+  reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
 
   hide = true
 
   userForm = new FormGroup({
     username: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
+      Validators.minLength(5),
     ]),
     firstName: new FormControl('', [
       Validators.required,
@@ -35,9 +36,12 @@ export class CreateemployeeComponent implements OnInit {
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(3),
     ]),
-    imageUrl: new FormControl('', [Validators.required]),
+    imageUrl: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.reg),
+    ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),

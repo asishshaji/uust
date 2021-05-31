@@ -10,6 +10,16 @@
       <label for="firstName">First Name</label>
       <input type="text" id="firstName" class=" form-control" id="firstName" placeholder="Enter firstname"
         formControlName="firstName" name="firstName">
+      <div *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.invalid" class="text-danger">
+
+        <div *ngIf="userForm.get('firstName')?.errors?.required">
+          First name is required
+        </div>
+
+        <div *ngIf="userForm.get('firstName')?.errors?.minlength">
+          Minimum 3 characters required
+        </div>
+      </div>
     </div>
 
     <!-- LastName -->
@@ -17,6 +27,16 @@
       <label for="lastName">Last Name</label>
       <input type="text" id="lastName" class=" form-control" id="lastName" placeholder="Enter lastname"
         formControlName="lastName" name="lastName">
+      <div *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.invalid" class="text-danger">
+
+        <div *ngIf="userForm.get('lastName')?.errors?.required">
+          Last name is required
+        </div>
+
+        <div *ngIf="userForm.get('lastName')?.errors?.minlength">
+          Minimum 3 characters required
+        </div>
+      </div>
     </div>
 
     <!-- Imageurl -->
@@ -29,6 +49,17 @@
         <div class="col-md-10">
           <input type="text" id="imageUrl" class="form-control" id="imageUrl" placeholder="Enter imageUrl"
             formControlName="imageUrl" name="imageUrl">
+          <div *ngIf="userForm.get('imageUrl')?.touched && userForm.get('imageUrl')?.invalid" class="text-danger">
+
+            <div *ngIf="userForm.get('imageUrl')?.errors?.required">
+              Url is required
+            </div>
+
+            <div *ngIf="userForm.get('imageUrl')?.errors?.pattern">
+              Enter valid url
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -50,12 +81,23 @@
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </div>
+        <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.invalid" class="text-danger">
 
+          <div *ngIf="userForm.get('password')?.errors?.required">
+            Password is required
+          </div>
+
+          <div *ngIf="userForm.get('password')?.errors?.minlength">
+            Minimum 6 characters
+          </div>
+
+        </div>
       </div>
 
     </div>
 
-    <button mat-raised-button [mat-dialog-close]="data" color="primary">Update</button>
+    <button mat-raised-button [mat-dialog-close]="data" color="primary" type="submit"
+      [disabled]="!userForm.valid">Update</button>
     <button mat-button (click)="onNoClick()">No Thanks</button>
   </form>
 
